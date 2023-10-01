@@ -1,4 +1,4 @@
-package practice;
+package practicebyme;
 
 import com.myfirstproject.utilities.TestBase;
 import org.junit.jupiter.api.Assertions;

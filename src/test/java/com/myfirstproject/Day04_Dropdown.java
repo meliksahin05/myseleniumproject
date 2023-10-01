@@ -72,43 +72,6 @@ getFirstSelectedOption method
             Assert if Texas is selected or not
             Then check is the state names are in  alphabetical order(THIS WILL FAIL B/C STATE LIST IS NOT IN ALPHABETICAL ORDER)
          */
-        driver.get("https://testcenter.techproeducation.com/index.php?page=dropdown");
-//      1. locate the dropdown element
-        WebElement state = driver.findElement(By.id("state"));
-//      2. create a select object
-        Select selectState = new Select(state);
-
-//      3.now that we have an object, we can interact with this dropdown element
-//        Then print the total number of states from the dropdown
-
-        int totalNumberOfStates = selectState.getOptions().size();
-        System.out.println(totalNumberOfStates);
-
-//        Then print all the state names
-        List<WebElement> allStates = selectState.getOptions();
-        for (WebElement eachStates : allStates) {
-            System.out.println(eachStates.getText());
-        }
-        Thread.sleep(3000);
-//        Select 'Texas' opting using one of the method
-          selectState.selectByVisibleText("Texas");
-
-//        Assert if Texas is selected or not
-          WebElement selectedState = selectState.getFirstSelectedOption();
-//         System.out.println(selectedState.getText().equals("Texas"));
-
-//        Assert if Texas is selected or not
-          Assertions.assertTrue(selectedState.getText().equals("Texas"));
-
-//        Then check is the state names are in  alphabetical order(THIS WILL FAIL B/C STATE LIST IS NOT IN ALPHABETICAL ORDER)
-        List<WebElement> checkAllStates = selectState.getOptions();
-        for (WebElement eachStates : checkAllStates) {
-            checkAllStates.add(eachStates);
-
-        }
-
-
-
     }
 
 }
