@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class Day05_Alerts extends TestBase {
 
     //    Go to https://testcenter.techproeducation.com/index.php?page=javascript-alerts
@@ -25,52 +27,57 @@ public class Day05_Alerts extends TestBase {
 //    type “Hello World”,
 //    click OK,
 //    and Verify “You entered: Hello World”
+
     @Test
-    public void acceptAlert(){
+    public void acceptAlert() {
+//    Go to https://testcenter.techproeducation.com/index.php?page=javascript-alerts
         driver.get("https://testcenter.techproeducation.com/index.php?page=javascript-alerts");
-//        click on the first alert,
-        driver.findElement(By.xpath("//button[@onclick='jsAlert()']")).click();
-//        !!!!!!!! NOW AT THIS POINT THERE IS AN ALERT ON THE PAGE THAT MUST BE HANDLED
+//    acceptAlert() => click on the first alert,
+        driver.findElement(By.cssSelector("button[onclick='jsAlert()']")).click();
 //    verify the text “I am a JS Alert” ,
-        String alertText = driver.switchTo().alert().getText();
-        Assertions.assertTrue(alertText.equals("I am a JS Alert"));
+        String verifyAllert = driver.switchTo().alert().getText();
+        assertTrue(verifyAllert.equals("I am a JS Alert"));
 //    click OK ,
         driver.switchTo().alert().accept();
 //    and Verify “You successfully clicked an alert”
-        Assertions.assertTrue(driver.findElement(By.id("result")).getText().equals("You successfully clicked an alert"));
+        String verifySuccessfullMessage = driver.findElement(By.id("result")).getText();
+        assertTrue(verifySuccessfullMessage.equals("You successfully clicked an alert"));
 
     }
+
     @Test
-    public void dismissAlert(){
+    public void dismissAlert() {
+//    Go to https://testcenter.techproeducation.com/index.php?page=javascript-alerts
         driver.get("https://testcenter.techproeducation.com/index.php?page=javascript-alerts");
 //    dismissAlert()=> click on the second alert,
         driver.findElement(By.xpath("//button[@onclick='jsConfirm()']")).click();
-//        ALERT POPS UP
-//    verify text "I am a JS Confirm”,
-        Assertions.assertTrue(driver.switchTo().alert().getText().equals("I am a JS Confirm"));
-//    click cancel,
+//      verify text "I am a JS Confirm”,,
+        String verifyAllert = driver.switchTo().alert().getText();
+        assertTrue(verifyAllert.equals("I am a JS Confirm"));
+////    click Cancel ,
         driver.switchTo().alert().dismiss();
 //    and Verify “You clicked: Cancel”
-        Assertions.assertTrue(driver.findElement(By.id("result")).getText().equals("You clicked: Cancel"));
+       String verifyCancelMessage = driver.findElement(By.id("result")).getText();
+        assertTrue(verifyCancelMessage.equals("You clicked: Cancel "));
 
     }
 
     @Test
-    public void sendKeysAlert(){
+    public void sendKeysAlert() {
+//    Go to https://testcenter.techproeducation.com/index.php?page=javascript-alerts
         driver.get("https://testcenter.techproeducation.com/index.php?page=javascript-alerts");
 //    sendKeysAlert()=> click on the third alert,
         driver.findElement(By.xpath("//button[@onclick='jsPrompt()']")).click();
-//    verify text “I am a JS prompt”,
-        Assertions.assertTrue(driver.switchTo().alert().getText().equals("I am a JS prompt"));
+////      verify text "I am a JS Confirm”,,
+          String verifyAllert = driver.switchTo().alert().getText();
+          assertTrue(verifyAllert.equals("I am a JS prompt"));
 //    type “Hello World”,
-        driver.switchTo().alert().sendKeys("Hello World");
-//    click OK,
-        driver.switchTo().alert().accept();
+          driver.switchTo().alert().sendKeys("Hello world");
+//          click ok
+          driver.switchTo().alert().accept();
 //    and Verify “You entered: Hello World”
-        Assertions.assertTrue(driver.findElement(By.id("result")).getText().equals("You entered: Hello World"));
+        String verifyEnteredText = driver.findElement(By.id("result")).getText();
+        assertTrue(verifyEnteredText.equals("You entered: Hello world"));
 
     }
-
-
-
 }
