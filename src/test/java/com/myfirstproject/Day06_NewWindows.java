@@ -53,5 +53,8 @@ public class Day06_NewWindows extends TestBase {
         System.out.println("EBAY URL " + driver.getCurrentUrl());
 
     }
+
+
+
 }
 
