@@ -1,4 +1,4 @@
-package homework;
+package homework1;
 
 import com.myfirstproject.utilities.TestBase;
 import org.junit.jupiter.api.Test;
