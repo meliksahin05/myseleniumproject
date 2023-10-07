@@ -57,6 +57,10 @@ public class Day07_WebTables extends TestBase {
             colNum++;
         }
 
+//    HOMEWORK : Task 5 : Write a method that accepts 2 parameters
+//    Parameter 1 = row number
+//    Parameter 2 = column number
+//    printData(2,3);  => prints data in 2nd row 3rd column
 
 
 
