@@ -1,14 +1,13 @@
 package practicebyme;
 
 import com.myfirstproject.utilities.TestBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class Day08_PracticeWebTables extends TestBase {
+public class Day07_PracticeWebTables extends TestBase {
 
 //    https://the-internet.herokuapp.com/tables
 //    Create a class: WebTables

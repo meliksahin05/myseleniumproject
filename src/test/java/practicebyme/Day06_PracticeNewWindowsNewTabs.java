@@ -6,7 +6,7 @@ import org.openqa.selenium.WindowType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Day_06PracticeNewWindowsNewTabs extends TestBase {
+public class Day06_PracticeNewWindowsNewTabs extends TestBase {
 
 
 //    Open the pages in 2 new windows and verify their TITLES
