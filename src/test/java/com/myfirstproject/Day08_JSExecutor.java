@@ -68,6 +68,8 @@ public class Day08_JSExecutor extends TestBase {
         System.out.println(inputValue);
 
 
+
+
 /*
 Javascript executor is a selenium class that is used to run javascript codes
 We should prefer normal selenium methods, but sometimes they may not work(element.click() may not click)
