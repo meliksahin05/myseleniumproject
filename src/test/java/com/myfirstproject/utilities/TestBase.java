@@ -19,10 +19,10 @@ import java.util.Random;
 
 public abstract class TestBase {
     /*
-    TestBase class is used for calling repetitive pre-conditions and post-conditions
-    make the driver protected because it should be visible in the other classes
-    Test base will be exteded other test classes and @Before and @After methods will be automatically executed
-     */
+   TestBase class is used for calling repetitive pre-conditions and post-conditions
+   make the driver protected because it should be visible in the other classes
+   Test base will be exteded other test classes and @Before and @After methods will be automatically executed
+    */
     protected static WebDriver driver;
     @BeforeEach
     public void setUp(){
@@ -35,12 +35,12 @@ public abstract class TestBase {
     public void tearDown(){
 //        driver.quit();
     }
-    //    Create a method that select an option from a dropdown index
+    //DROPDOWN
+//    Create a method that select an option from a dropdown index
     public static void dropdownSelectByIndex(WebElement dropdownElement,int index){
         Select select = new Select(dropdownElement);
         select.selectByIndex(index);
     }
-    //DROPDOWN
     public static void dropdownSelectByIndex(By locator,int index){
         WebElement dropdownElement = driver.findElement(locator);
         Select select = new Select(dropdownElement);
@@ -51,7 +51,7 @@ public abstract class TestBase {
         Select select = new Select(dropdownElement);
         select.selectByIndex(index);
     }
-    public static void dropdownSelectByVisibleText(WebElement dropdownElement, String text){
+    public static void dropdownSelectByVisibleText(WebElement dropdownElement, String text){//USEFUL
         Select select =new Select(dropdownElement);
         for (int i =0;i<select.getOptions().size();i++){
             if(select.getOptions().get(i).getText().equalsIgnoreCase(text)){
@@ -135,7 +135,6 @@ public abstract class TestBase {
         }
         driver.switchTo().window(origin);
     }
-
     //ACTIONS_DOUBLE CLICK : doubleClick(buttonElement)
     public static void actionsDoubleClick(WebElement element) {
         new Actions(driver).doubleClick(element).build().perform();
@@ -173,8 +172,6 @@ public abstract class TestBase {
         //        Actions actions = new Actions(driver);
         new Actions(driver).dragAndDropBy(source,x,y).perform();
     }
-
-
     //    JS EXECUTOR METHODS
     /*
     click with JS
@@ -275,7 +272,6 @@ public abstract class TestBase {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
     //    ROBOT UPLOAD FILE
     public static void uploadFile(String pathOfFile){
         try {
@@ -302,5 +298,4 @@ public abstract class TestBase {
         }catch (Exception e){
         }
     }
-
 }
