@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,11 +19,12 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class TestBase {
+
     /*
-   TestBase class is used for calling repetitive pre-conditions and post-conditions
-   make the driver protected because it should be visible in the other classes
-   Test base will be exteded other test classes and @Before and @After methods will be automatically executed
-    */
+TestBase class is used for calling repetitive pre-conditions and post-conditions
+make the driver protected because it should be visible in the other classes
+Test base will be exteded other test classes and @Before and @After methods will be automatically executed
+ */
     protected static WebDriver driver;
     @BeforeEach
     public void setUp(){
@@ -271,6 +273,25 @@ public abstract class TestBase {
     public static WebElement waitForVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public static WebElement waitForClickablility(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+    public static WebElement waitForClickablility(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+    //======Fluent Wait====
+    // params : xpath of teh element , max timeout in seconds, polling in second
+    public static WebElement fluentWait(String xpath, int withTimeout, int pollingEvery) {
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(withTimeout))//Wait 3 second each time
+                .pollingEvery(Duration.ofSeconds(pollingEvery))//Check for the element every 1 second
+                .withMessage("Ignoring No Such Element Exception")
+                .ignoring(NoSuchElementException.class);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        return element;
     }
     //    ROBOT UPLOAD FILE
     public static void uploadFile(String pathOfFile){
