@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -271,6 +274,33 @@ public abstract class TestBase {
     public static WebElement waitForVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    //    ROBOT UPLOAD FILE
+    public static void uploadFile(String pathOfFile){
+        try {
+            waitFor(1);
+//            copy the path of the file that is given
+            StringSelection stringSelection = new StringSelection(pathOfFile);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection,null);
+//            creating robot object
+            Robot robot = new Robot();
+//            press control V = paste
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            waitFor(1);
+//            release control V
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_V);
+            waitFor(1);
+//            press enter
+            robot.keyPress(KeyEvent.VK_ENTER);
+//            release enter
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            waitFor(1);
+            System.out.println("Upload is completed...");
+        }catch (Exception e){
+        }
     }
 
 }
