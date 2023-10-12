@@ -338,9 +338,22 @@ Test base will be exteded other test classes and @Before and @After methods will
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
-
     }
+
+    //        SCREENSHOTS : capture the screenshot of the given WEB ELEMENT . Ex: captureScreenshotOfElement(logoElement)
+    public void captureScreenshotOfElement(WebElement element){
+        //        1. getScreenShotAs method to capture the screenshot
+        File image = element.getScreenshotAs(OutputType.FILE);
+//        2. save the image in a path with a dynamic name
+        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String filePath = System.getProperty("user.dir")+"/test-output/ElementsScreenshot/"+now+"image.png";
+//        3. save the image in the path
+        try {
+            FileUtils.copyFile(image,new File(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
