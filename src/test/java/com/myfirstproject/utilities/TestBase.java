@@ -1,5 +1,6 @@
 package com.myfirstproject.utilities;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
@@ -13,8 +14,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -319,4 +324,23 @@ Test base will be exteded other test classes and @Before and @After methods will
         }catch (Exception e){
         }
     }
+
+    //        SCREENSHOTS : capture the screenshot of entire page
+    public void captureScreenshotEntirePage(){
+//        1. getScreenShotAs method to capture the screenshot
+        File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        2. save the image in a path with a dynamic name
+        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String filePath = System.getProperty("user.dir")+"/test-output/Screenshot/"+now+"image.png";
+//        3. save the image in the path
+        try {
+            FileUtils.copyFile(image,new File(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+    }
+
 }
