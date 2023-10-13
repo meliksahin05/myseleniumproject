@@ -1,10 +1,16 @@
 package com.myfirstproject.utilities;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -30,10 +36,65 @@ TestBase class is used for calling repetitive pre-conditions and post-conditions
 make the driver protected because it should be visible in the other classes
 Test base will be exteded other test classes and @Before and @After methods will be automatically executed
  */
+
+    /*
+  TestBase class is used for calling repetitive pre-conditions and post-conditions
+  make the driver protected because it should be visible in the other classes
+  Test base will be exteded other test classes and @Before and @After methods will be automatically executed
+   */
     protected static WebDriver driver;
+    /*
+    Create 3 extent reports objects :
+    ExtentReports(create report),
+    ExtentHTMLReporter(generate html template),
+    ExtentTest(log test steps. Only this will be used in test classes )
+     */
+    protected static ExtentReports extentReports;
+    protected  static ExtentHtmlReporter extentHtmlReporter;
+    protected static ExtentTest extentTest;
+    /*
+    create BeforeAll for extent report pre requirement
+    create AfterAll for generation the reports using flush
+     */
+    @BeforeAll
+    public static void setExtentReports(){
+        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String reportPath = System.getProperty("user.dir")+"/test-output/Reports/"+now+"extent-reports.html";
+        extentReports = new ExtentReports();
+        extentHtmlReporter = new ExtentHtmlReporter(reportPath);
+//        *****OPTIONAL : ADD CUSTOM SYSTEM INFORMATION USING extentReports****
+        extentReports.setSystemInfo("Project Name : ","Payment Division");
+        extentReports.setSystemInfo("Browser : ","Chrome");
+        extentReports.setSystemInfo("Team Name : ","Eagles");
+        extentReports.setSystemInfo("SQA : ","John");
+        extentReports.setSystemInfo("Environment : ","UAT");
+
+//        ******OPTIONAL: ADD DOCUMENT INFORMATION using extentHtmlReporter****
+        extentHtmlReporter.config().setReportName("My UAT report");
+        extentHtmlReporter.config().setDocumentTitle("My Extent Report");
+
+//        ***DONE WITH CONFIGURATION***
+
+//        attached extent report and html reporter
+        extentReports.attachReporter(extentHtmlReporter);
+
+//        ***CREATE EXTENT TEST REPORT
+        extentTest = extentReports.createTest("My first test case","Team Eahles test cases");
+    }
+    @AfterAll
+    public static void flushExtentReports(){
+//        required for generating the report
+        extentReports.flush();
+    }
+
+
     @BeforeEach
     public void setUp(){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
+
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().window().maximize();
@@ -353,6 +414,23 @@ Test base will be exteded other test classes and @Before and @After methods will
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //        SCREENSHOTS : capture the screenshot of the given WEB ELEMENT . Ex: captureScreenshotOfElement(logoElement)
+    public static String captureScreenshotEntirePageAsString(){
+        //        1. getScreenShotAs method to capture the screenshot
+        File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //        2. save the image in a path with a dynamic name
+        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String filePath = System.getProperty("user.dir")+"/test-output/Reports/"+now+"image.png";
+        //        3. save the image in the path
+        try {
+            FileUtils.copyFile(image,new File(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //       4. return the path of the image as string. (THIS WILL BE USED TO ATTACH IN THE EXTENT REPORTS)
+        return new File(filePath).getAbsolutePath();
     }
 
 

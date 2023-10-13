@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class C02_WindowsHomework extends TestBase {
+public class AhmetBey_WindowsHomework extends TestBase {
 
 //    When Navigate to https://testpages.herokuapp.com/styled/windows-test.html
 //    When Click on "Alerts In A New Window From JavaScript"

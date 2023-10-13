@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class C01_Homework1 extends TestBase {
+public class C01_HomeworkFirstTask extends TestBase {
 
 //    Task1:
 //    Navigate to Go to https://www.facebook.com/
