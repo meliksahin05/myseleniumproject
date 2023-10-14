@@ -91,7 +91,7 @@ Test base will be exteded other test classes and @Before and @After methods will
     @BeforeEach
     public void setUp(){
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
+//        options.addArguments("--incognito");
         driver = new ChromeDriver(options);
 
 
@@ -391,7 +391,7 @@ Test base will be exteded other test classes and @Before and @After methods will
 //        1. getScreenShotAs method to capture the screenshot
         File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 //        2. save the image in a path with a dynamic name
-        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+System.nanoTime();
         String filePath = System.getProperty("user.dir")+"/test-output/Screenshot/"+now+"image.png";
 //        3. save the image in the path
         try {
