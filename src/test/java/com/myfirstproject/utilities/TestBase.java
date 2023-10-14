@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
@@ -32,16 +31,10 @@ import java.util.Random;
 public abstract class TestBase {
 
     /*
-TestBase class is used for calling repetitive pre-conditions and post-conditions
-make the driver protected because it should be visible in the other classes
-Test base will be exteded other test classes and @Before and @After methods will be automatically executed
- */
-
-    /*
-  TestBase class is used for calling repetitive pre-conditions and post-conditions
-  make the driver protected because it should be visible in the other classes
-  Test base will be exteded other test classes and @Before and @After methods will be automatically executed
-   */
+     TestBase class is used for calling repetitive pre-conditions and post-conditions
+     make the driver protected because it should be visible in the other classes
+     Test base will be exteded other test classes and @Before and @After methods will be automatically executed
+      */
     protected static WebDriver driver;
     /*
     Create 3 extent reports objects :
@@ -90,9 +83,10 @@ Test base will be exteded other test classes and @Before and @After methods will
 
     @BeforeEach
     public void setUp(){
-        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--incognito");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
 
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));

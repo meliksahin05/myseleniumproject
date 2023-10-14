@@ -1,4 +1,4 @@
-package com.myfirstproject.practices;
+package com.myfirstproject.practices.practice05;
 
 import com.myfirstproject.utilities.TestBase;
 import org.junit.jupiter.api.Test;
