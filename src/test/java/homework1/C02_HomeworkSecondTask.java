@@ -24,6 +24,7 @@ public class C02_HomeworkSecondTask extends TestBase {
     public void homeworkSecondTask(){
 
 //        Go to https://testcenter.techproeducation.com/index.php?page=dropdown
+        driver.get("https://testcenter.techproeducation.com/index.php?page=dropdown");
 
 //       Create method selectByIndexTest and Select Option 1 using index from Simple dropdown
 
@@ -54,6 +55,8 @@ public class C02_HomeworkSecondTask extends TestBase {
         // Option 1'i index 0 kullanarak seçin (index 0'dan başlar)
         dropdown.selectByIndex(0);
     }
+
+
 
 
 

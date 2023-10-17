@@ -52,6 +52,8 @@ public class Day06_NewWindows extends TestBase {
         driver.switchTo().window(ebayHandle);
         System.out.println("EBAY URL " + driver.getCurrentUrl());
 
+
+
     }
 
 
