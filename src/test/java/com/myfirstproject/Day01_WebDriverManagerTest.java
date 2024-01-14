@@ -3,6 +3,7 @@ package com.myfirstproject;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Day01_WebDriverManagerTest {
 
@@ -16,14 +17,14 @@ public class Day01_WebDriverManagerTest {
          */
 
         // 1. WebDriverManger is used to instantiate the drivers
-        WebDriverManager.chromedriver().setup(); //which driver will be used
+//        WebDriverManager.chromedriver().setup(); //which driver will be used
 //        WebDriverManager.edgedriver().setup();
-//        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.firefoxdriver().setup();
 
 
 
         //2. Step Create the ChromeDriver
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
 
         // 3. step now that we have our driver ready to use, we can start automation
 

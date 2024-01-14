@@ -28,6 +28,7 @@ public class Day08_Actions extends TestBase {
 //    Given user is on the https://www.amazon.com/
         driver.get("https://www.amazon.com/");
         Thread.sleep(1000);
+        driver.navigate().refresh();
 
         //1. Create actions objects
         Actions actions = new Actions(driver);
